@@ -1,0 +1,131 @@
+<div class="panel panel-primary">
+	<div class="panel-heading">
+    	<h3 class="panel-title">Agregar contactos</h3>
+  	</div>
+	<div class="panel-body">
+		<form id="formDatos" name= "formulario" class="form-horizontal" novalidate >
+			<div class="form-group">		
+				<label for="nombre" class="col-sm-4 control-label">Nombre:</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="dato.nombre" class="form-control" name="nombre" placeholder="Nombre" required>
+					<div class="alert alert-warning" role="alert" ng-show="formulario.nombre.$error.required">Ingrese un nombre</div>
+				</div>
+			</div>
+			<div class="form-group">	
+				<label for="apellido" class="col-sm-4 control-label">Apellido:</label>
+				<div class="col-sm-8">	
+					<input type="text" ng-model="dato.apellido" class="form-control" name="apellido" placeholder="Apellido" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="lugarTrabajo" class="col-sm-4 control-label">Lugar de Trabajo:</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="dato.lugarTrabajo" class="form-control" name="lugarTrabajo" placeholder="Lugar de trabajo">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="telefonoCasa" class="col-sm-4 control-label">Teléfono fijo:</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="dato.telefonoCasa" class="form-control" name="telefonoCasa" placeholder="Teléfono fijo" /> 
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="movil" class="col-sm-4 control-label">Teléfono móvil:</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="dato.movil" class="form-control" name="movil" placeholder="Teléfono móvil" required> 
+					<div class="alert alert-warning" ng-show="formulario.movil.$error.required">Ingrese un teléfono móvil</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="direccion" class="col-sm-4 control-label">Dirección de casa:</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="dato.direccion" class="form-control" placeholder="Dirección de casa" name="direccion">
+				</div> 
+			</div>
+			<div class="form-group">
+				<label for="email" class="col-sm-4 control-label">Correo electrónico:</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="dato.email" ng-pattern="regex" class="form-control" placeholder="Correo electrónico" name="email" required />
+					<div class="alert alert-warning" role="alert" ng-show="!formulario.email.$valid">Ingrese un correo</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-offset-4 col-sm-8">
+					<input type="submit" ng-click="agregarContacto()" class="btn btn-primary" role="button" value="Agregar Contacto" ng-disabled="!formulario.$valid">
+				</div>
+			</div>
+
+		</form>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">Buscar contacto</div>
+	<div class="panel-body">
+		<div class="form-horizontal">
+			<div class="form-group">
+				<label class="col-sm-4 control-label">Buscar por nombre o apellido:</label>
+				<div class="col-sm-8">
+					<input type="text" ng-model="filtrar" class="form-control" placeholder="buscar">
+				</div>
+			</div>
+		</div>
+		<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th></th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="p in contacto | filter : filtrar">
+						<td>{{$index+1}}</td>
+						<td>{{p.nombre}}</td>
+						<td>{{p.apellido}}</td>
+						<td><button ng-click="irEdtContacto($index)" class="btn btn-primary" role="button">Editar</button></td>
+						<td><button ng-click="elmContacto($index)" class="btn btn-danger" role="button" >Eliminar</button></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+<div class="panel panel-primary">
+	<div class="panel-heading">Lista de contactos</div>
+	<div class="panel-body">
+    	<p>Lista de contactos</p>
+    	<div class="table-responsive">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>#</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Lugar de trabajo</th>
+						<th>Télefono fijo</th>
+						<th>Télefono móvil</th>
+						<th>Dirección de casa</th>
+						<th>Correo electrónico</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="cont in contacto">
+						<td>{{$index+1}}</td>
+						<td>{{cont.nombre}}</td>
+						<td>{{cont.apellido}}</td>
+						<td>{{cont.lugarTrabajo}}</td>
+						<td>{{cont.telefonoCasa}}</td>
+						<td>{{cont.movil}}</td>
+						<td>{{cont.direccion}}</td>
+						<td>{{cont.email}}</td>
+					</tr>
+				</tbody>
+			</table>
+  		</div>	
+  	</div>
+
+ 	
+</div>
